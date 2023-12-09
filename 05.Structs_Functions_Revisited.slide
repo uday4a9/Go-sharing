@@ -1,0 +1,60 @@
+# Methods & Interfaces
+
+## structs revisited
+
+    Go is a statically typed language with both built-in types and user-defined types. 
+    Like most modern languages, Go allows you to attach methods to types.
+
+    Method declarations look just like function declarations, with one addition 
+    the receiver specification
+
+.code -numbers -edit code/structs_funcs_revisited/methods.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/methods.go /String()/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/methods.go /SetAge/,/^}/ 
+
+## 
+
+.play -numbers -edit code/structs_funcs_revisited/methods.go /^func main/,/^}/
+
+## Use Embedding for Composition
+
+.play -numbers -edit code/structs_funcs_revisited/embed.go /^func main/,/^}/
+
+## Interfaces
+    - Go's interfaces special is that they are implemented implicitly
+    - An empty interface can hold values of any type since every type implements at least zero methods. 
+
+.play -numbers -edit code/structs_funcs_revisited/interface.go /^func main/,/^}/
+
+## Iterfaces cont...
+    - An interface type is defined as a set of method signatures.
+    - A value of interface type can hold any value that implements those methods.
+
+.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^type Printer/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^type Printer/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^func \(e Employee\) Print/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^func \(p Person\) Print/,/^}/
+
+##
+
+.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^func Print/,/^}/
+
+.play -numbers -edit code/structs_funcs_revisited/interface_type.go /^func main/,/^}/
+
+
+
+
+
+
+    
+
+
+
+

@@ -1,0 +1,83 @@
+# Control Structures
+
+## Blocks
+    Go lets you declare variables in lots of places. You can declare them outside 
+    of func‐ tions, as the parameters to functions, and as local variables within 
+    functions.
+
+    Each place where a declaration occurs is called a block.
+
+## if
+
+    The if statement in Go is much like the if statement in most programming languages.
+
+.play -numbers -edit code/control_structures/if.go /^func main/,/^}/
+
+    The most visible difference between if statements in Go and other languages is that 
+    you don’t put parenthesis around the condition.
+
+## if contd...
+
+.play -numbers -edit code/control_structures/if2.go /^func main/,/^}/
+
+
+## if contd(2)...
+
+.play -numbers -edit code/control_structures/if3.go /^func main/,/^}/
+
+## for
+    In golang, only for loop exists for iterative traversal
+    there are different use cases defined to use for loop
+
+c style for loop
+
+.play -numbers -edit code/control_structures/for.go /^func main/,/^}/
+
+    Just like the if statement, there are no parenthesis around the parts of the for statement.
+    var is not legal in for loop, only := is valid
+
+## for contd...
+The Condition-Only for Statement
+
+.play -numbers -edit code/control_structures/for2.go /^func main/,/^}/
+
+The Infinite for Statement
+
+.play -numbers -edit code/control_structures/for3.go /^func main/,/^}/
+
+    How do you get out of an infinite for loop without using the keyboard ? 
+
+
+## break and continue
+    That’s the job of the break statement.
+
+.play -numbers -edit code/control_structures/for4.go /^func main/,/^}/
+
+    Similaly continue is another flow control statement, Where as that'll be 
+    used to skip the next condition execution and jump to for loop conditional check
+
+## for contd(2)... for-range Statement
+    The most used and important type. This can be applied to any ordered/unordered
+    iterative data types(string, array, slice and maps).
+
+.play -numbers -edit code/control_structures/for5.go /^func main/,/^}/
+
+## switch
+
+Expect few surprises, who hate switch in the other programming languages
+
+.play -numbers -edit code/control_structures/switch.go /^func main/,/^}/
+
+    - Missing break already, for individual case statements (no implicit fallthrough)
+    - There is only one place, where we can use break inside switch i.e to break outer for loop
+
+## Blank Switch
+We can leave the switch conditional statement/expression as blank as in for loop
+
+.play -numbers -edit code/control_structures/switch2.go /^func main/,/^}/
+
+
+
+
+
+

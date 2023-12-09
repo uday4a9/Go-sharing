@@ -1,0 +1,65 @@
+# Functions
+
+## function saga
+    We've already seen functions being declared and used. Every program we've 
+    written has a main function that's the starting point for every Go program
+
+    A function declaration has four parts: the keyword func, the name of the function, 
+    the input parameters, and the return type.
+
+    Syntax:
+        func <fun_name>(args...) <return_type> {
+            return <type>
+        }
+    
+    Just like other languages, Go has a return keyword for returning values from a function
+
+.code -numbers -edit code/functions/add.go /^func add/,/^}/
+
+.play -numbers -edit code/functions/add.go /^func main/,/^}/
+
+## variadic input 
+
+.code -numbers -edit code/functions/variadic_input.go /^func addTo/,/^}/
+
+.play -numbers -edit code/functions/variadic_input.go /^func main/,/^}/
+
+## Multiple Return Values
+
+.code -numbers -edit code/functions/return_values.go /^func divAndRemainder/,/^}/
+
+.play -numbers -edit code/functions/return_values.go /^func main/,/^}/
+
+
+## Functions Are Values
+    The type of a function is built out of the keyword func and the types of the parameters 
+    and return values. This combination is called the signature of the function. Any function 
+    that has the exact same number and types of parameters and return values meets the type signature.
+
+.code -numbers -edit code/functions/functions_as_values.go /^func add/,/^}/
+
+.play -numbers -edit code/functions/functions_as_values.go /^func main/,/^}/
+
+## Anonymous Functions
+
+.play -numbers -edit code/functions/anonymous_func.go /^func main/,/^}/
+
+## defer
+
+    Programs often create temporary resources, like files or network connections, 
+    that need to be cleaned up. This cleanup has to happen, no matter how many exit
+    points a function has, or whether a function completed successfully or not. 
+    In Go, the cleanup code is attached to the function with the defer keyword.
+
+.play -numbers -edit code/functions/defer.go /^func main/,/^}/
+
+## 
+<h2>GO is call by value !</h2>
+
+
+
+
+
+
+
+

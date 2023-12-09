@@ -1,0 +1,30 @@
+# Pointers
+
+## Pointer ??? :Again:
+
+    A pointer is simply a variable that holds the location in memory where a value is stored.
+
+    The zero value for a pointer is nil
+
+    Syntax1:
+        var <ptr_name> *<data_type>
+            This always initites to nil
+    
+    Syntax2:
+        ptr_name := new(<data_type>)
+            this always points to a memory location where the values are zeroed for the data type
+
+.play -numbers -edit code/pointers/pointer.go /^func main/,/^}/
+
+## 
+
+.play -numbers -edit code/pointers/pointer2.go /^func main/,/^}/
+
+.play -numbers -edit code/pointers/pointer3.go /^func main/,/^}/
+
+## 
+
+<h2> No Worries, there is no pointer arithmetic ! </h2>
+
+
+

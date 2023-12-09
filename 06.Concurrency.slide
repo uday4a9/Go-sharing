@@ -1,0 +1,81 @@
+# Concurrency
+
+## Goroutines
+    concurrency is not parallelism !
+    The goroutine is the core concept in Go's concurrency mode
+    Goroutines are lightweight processes managed by the Go runtime.
+    Advantages:
+        - Goroutine creation is faster than thread creation
+        - Goroutine initial stack sizes are smaller than thread stack sizes and can grow as needed
+        - Switching between goroutines is faster than switching between threads
+        - The scheduler is able to optimize its decisions because it is part of the Go process
+    A goroutine is launched by placing the go keyword before a function invocation.
+
+.play -numbers -edit code/concurrency/goroutine.go /^func main/,/^}/
+
+##
+
+.play -numbers -edit code/concurrency/goroutine2.go /^func main/,/^}/
+
+## Channels
+    Goroutines communicate using channels. Like slices and maps, channels are a built-in type 
+    created using the make function.
+
+    Syntax:
+        var ch chan <data_type>
+        nil type initialization
+
+    Syntax2:
+        ch := make(chan <data_type>)
+        Like maps, channels are reference types.
+
+    Reading, Writing, and Buffering
+        Use the <- operator to interact with a channel.
+
+    Ex:
+        ch := make(chan int)
+        a := <-ch   // Reading the value from the channel
+        ch <- b      // Writing the value 'b' to the channel
+
+## Channels
+    - Each value written to a channel can only be read once
+    - By default channels are unbuffered
+    - Every write to an open, unbuffered channel causes the writing goroutine 
+      to pause until another goroutine reads from the same channel.
+    - Likewise, a read from an open, unbuffered channel causes the reading goroutine 
+      to pause until another goroutine writes to the same channel.
+
+.play -numbers -edit code/concurrency/chan1.go 
+
+##
+
+    - We can apply for-range on channels (Ref: chan2.go)
+    - When you are done writing to a channel, you close it using the built-in 
+      close function. (Ref: chan2.go)
+    - ok, done patter on channels similar to maps.
+
+## Concurrent Read/Write operations
+
+.play -numbers -edit code/concurrency/concur.go /^func main/,/^}/
+
+
+## select
+    The select statement is the other thing that sets apart Go's concurrency model.
+    It is the control structure for concurrency in Go, and it elegantly solves a 
+    common problem: if you can perform two concurrent operations, which one do you do first? 
+    You can't favor one operation over others, or you'll never process some cases.
+
+.play -numbers -edit code/concurrency/concur2.go /^func main/,/^}/
+
+## Waitgroups
+    Sometimes one goroutine needs to wait for multiple goroutines to complete their work.
+
+.play -numbers -edit code/concurrency/waitgroups.go /^func main/,/^}/
+
+
+
+
+
+
+
+

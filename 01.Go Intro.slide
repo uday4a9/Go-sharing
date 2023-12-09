@@ -1,0 +1,235 @@
+# Go Intro
+
+## What is Go ?
+<br><br>
+<p>Go (or Golang) is a statically typed, compiled programming language 
+designed for simplicity, efficiency, and ease of use, with a focus on 
+concurrent programming and scalability. Developed by Google, it has 
+gained popularity for its performance and straightforward syntax.</p>
+
+## 
+
+<h2>
+How Big is Go ? <br>
+How a go program looks like ?
+</h2>
+
+## 
+<br>
+
+**Go has 25 keywords.**
+
+<br>
+    This simplicity is intentional, reflecting Go's design philosophy 
+    of providing a minimalistic and readable syntax.
+<br>
+
+.play -numbers -edit code/datatypes/prog_structure.go
+
+## 
+<h1>
+DataTypes
+</h1>
+
+## Primitive datatypes
+
+    Boolean (true/false)
+
+    Number
+        int  int8  int16  int32  int64
+        uint uint8 uint16 uint32 uint64
+
+        byte // alias for uint8
+
+        rune // alias for int32
+            // represents a Unicode code point
+
+        float32 float64
+
+    string
+
+	complex64 complex128 (Very Less Used)
+
+## Declaration
+
+    Assigns a default zero value to any variable that is declared but not assigned a value.
+    
+    Syntax: 
+        var <name> <datatype>
+    
+.play -numbers -edit code/datatypes/boolean.go /^func main/,/^}/
+    
+
+## Operators
+- arithmetic operators
+- comaprison operators
+- logical operators
+- bitwise operators
+- Incr/Decr operators
+
+## arithmetic operators
+
+    +    sum                    integers, floats, complex values, strings
+    -    difference             integers, floats, complex values
+    *    product                integers, floats, complex values
+    /    quotient               integers, floats, complex values
+    %    remainder              integers
+
+    &    bitwise AND            integers
+    |    bitwise OR             integers
+    ^    bitwise XOR            integers
+    &^   bit clear (AND NOT)    integers
+
+    <<   left shift             integer << integer >= 0
+    >>   right shift            integer >> integer >= 0
+
+* The result of an integer division is an integer; 
+if you want to get a floating point result, use a type conversion.
+
+
+## comparison operators
+
+	==    equal
+	!=    not equal
+	<     less
+	<=    less or equal
+	>     greater
+	>=    greater or equal
+
+* The equality operators == and != apply to operands of comparable types
+* The ordering operators <, <=, >, and >= apply to operands of ordered types.
+* String types are comparable and ordered.
+* Array types are comparable if their array element types are comparable
+.link https://go.dev/ref/spec#Comparison_operators see specs
+
+
+## logical operators
+
+	&&    conditional AND
+	||    conditional OR
+	!     NOT
+
+**Truth Table**
+
+	Left	Right	AND	OR
+ 	FALSE	FALSE	FALSE	FALSE
+ 	FALSE	TRUE	FALSE	TRUE
+ 	TRUE 	FALSE	FALSE	TRUE
+ 	TRUE	TRUE	TRUE	TRUE
+
+
+.link https://go.dev/ref/spec#Logical_operators see specs
+
+
+## bitwise operators
+
+	&	bitwise AND
+	|	bitwise OR
+	^	bitwise XOR
+	>>	binary right shift
+	<<	binary left shift
+
+## Incr/Decr operators
+
+    ++  
+    --
+
+## Composite datatypes
+
+    - Arrays
+    - Slice
+    - Map
+    - Struct
+
+## Arrays
+    Collection of same kind of elements i.e same data type
+    Syntax1:
+        var <var_name> [size]<data_type>
+    Syntax2:
+        var_name := [size]{<items>...}
+
+.play -numbers -edit code/datatypes/arrays.go /^func main/,/^}/
+
+    Size of the array is fixed
+
+## Arrays contd...
+    len is the global function to find out the length
+
+.play -numbers -edit code/datatypes/arrays2.go /^func main/,/^}/
+
+## Slices
+    What makes slices so useful is that the length is not part of the type for a slice.
+    Syntax1:
+        var <variable> []<type> = []{<type_items>...}
+    Syntax2:
+        <variable> := []<type>
+    Syntax3:
+        <variable> := make([]<type>, <len_int>, <cap_int>)
+
+.play -numbers -edit code/datatypes/slices.go /^func main/,/^}/
+
+## Slices contd..
+    So, Conclusion no operator can apply on slices
+    You can change the size of a slice dynamically using *append* function
+    Syntax:
+        <iterator_var> = append(<iterator_var>, <items>...)
+
+
+.play -numbers -edit code/datatypes/slices2.go /^func main/,/^}/
+
+## Slicing of Arrays/Slices/strings
+.play -numbers -edit code/datatypes/arr_slices.go /^func main/,/^}/
+
+## Maps
+    Go provides a built-in data type for situations where you want to associate one value to another.
+    
+    Syntax1:
+        var <variable> map[key_type]value_type
+    Syntax2:
+        <variable> := map[key_type]value {
+            "key1": "value1",
+        }
+    Syntax3:
+        <variable> := make(map[key_type]value_type)
+
+    Accessing the elements are un-ordered (No sequential access).
+
+.play -numbers -edit code/datatypes/maps.go /^func main/,/^}/
+
+## Maps contd...
+.play -numbers -edit code/datatypes/maps2.go /^func main/,/^}/
+
+## Maps contd(2)...
+- comma ok idiom
+
+.play -numbers -edit code/datatypes/maps3.go /^func main/,/^}/
+
+possible keys for a map are comaprable (except slices and maps)
+
+## Struct
+    When you have related data that you want to group together, you should define a struct
+    Before defining a variable for struct we need to define a struct
+    Syntax:
+        type <NEW_TYPE> struct {
+            <var> <type>
+            <var> <type2>
+        } 
+    
+    defining an instance for struct
+        Syntax:
+            var <instance> <NEW_TYPE>
+        Syntax1:
+            <instance> := <NEW_TYPE>{}
+    
+.play -numbers -edit code/datatypes/structs.go /^type Employee/,/^}/
+
+.play -numbers -edit code/datatypes/structs.go /^type Employee2/,/^}/
+
+## Structs contd...
+
+.play -numbers -edit code/datatypes/structs.go /^func main/,/^}/
+        
+## Structs contd(2)...
+we can declar/initialize slice of objects for the structs
+
+.play -numbers -edit code/datatypes/structs2.go /^func main/,/^}/
