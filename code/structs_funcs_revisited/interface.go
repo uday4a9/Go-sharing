@@ -7,19 +7,19 @@ type Employee struct {
 }
 
 func main() {
-	var s interface{}
+	var s interface{} // HL
 
 	str := "hello"
-	s = str
+	s = str // HL
 	fmt.Println(s)
 
 	i := 30
-	s = i
+	s = i // HL
 	fmt.Println(s)
 
 	e := Employee{
 		Name: "Bob Bobson",
 	}
-	s = e
+	s = e // HL
 	fmt.Println(s)
 }

@@ -9,11 +9,6 @@ func printHello() {
 }
 
 func main() {
-	printHello := func() {
-		fmt.Println("Hello from goroutine")
-	}
-
 	go printHello() // HL
 	fmt.Println("main function")
-
 }

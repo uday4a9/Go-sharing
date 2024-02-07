@@ -1,60 +1,186 @@
-# Methods & Interfaces
+# Methods 
 
-## structs revisited
+## Structs & Functions revisited
 
-    Go is a statically typed language with both built-in types and user-defined types. 
-    Like most modern languages, Go allows you to attach methods to types.
+.code -numbers -edit code/structs_funcs_revisited/func_revisited1.go /^type Employee/,/^}/
 
-    Method declarations look just like function declarations, with one addition 
-    the receiver specification
+.code -numbers -edit code/structs_funcs_revisited/func_revisited1.go /DisplayEmployee/,/^}/
 
-.code -numbers -edit code/structs_funcs_revisited/methods.go /^type Employee/,/^}/
+.code -numbers -edit code/structs_funcs_revisited/func_revisited1.go /ChangeEmployeeId/,/^}/
 
-.code -numbers -edit code/structs_funcs_revisited/methods.go /String()/,/^}/
+.play -numbers -edit code/structs_funcs_revisited/func_revisited1.go /^func main/,/^}/
 
-.code -numbers -edit code/structs_funcs_revisited/methods.go /SetAge/,/^}/ 
+## Structs & Functions contd..
+
+.code -numbers -edit code/structs_funcs_revisited/func_revisited1_ptr.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/func_revisited1_ptr.go /DisplayEmployee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/func_revisited1_ptr.go /ChangeEmployeeId/,/^}/
+
+.play -numbers -edit code/structs_funcs_revisited/func_revisited1_ptr.go /^func main/,/^}/
+
+## Methods introduced
+    Method declarations look just like func declarations, with one addition the receiver specification
+
+.code -numbers -edit code/structs_funcs_revisited/methods_val_receiver.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/methods_val_receiver.go /Display()/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/methods_val_receiver.go /SetAge()/,/^}/
+
+.play -numbers -edit code/structs_funcs_revisited/methods_val_receiver.go /^func main/,/^}/
+
+## Pointer receiver
+
+.code -numbers -edit code/structs_funcs_revisited/methods_ptr_receiver.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/methods_ptr_receiver.go /Display()/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/methods_ptr_receiver.go /SetAge()/,/^}/
+
+.play -numbers -edit code/structs_funcs_revisited/methods_ptr_receiver.go /^func main/,/^}/
 
 ## 
 
-.play -numbers -edit code/structs_funcs_revisited/methods.go /^func main/,/^}/
 
-## Use Embedding for Composition
+If your method modifies the receiver, you must use a pointer receiver.
 
-.play -numbers -edit code/structs_funcs_revisited/embed.go /^func main/,/^}/
+If your method doesn't modify the receiver, you can use a value receiver.
 
-## Interfaces
-    - Go's interfaces special is that they are implemented implicitly
-    - An empty interface can hold values of any type since every type implements at least zero methods. 
 
-.play -numbers -edit code/structs_funcs_revisited/interface.go /^func main/,/^}/
+## Struct Embedding
 
-## Iterfaces cont...
-    - An interface type is defined as a set of method signatures.
-    - A value of interface type can hold any value that implements those methods.
 
-.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^type Printer/,/^}/
 
-.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^type Employee/,/^}/
 
-.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^type Printer/,/^}/
+## 
+<h3>
+Nested struct
+</h3>
 
-.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^func \(e Employee\) Print/,/^}/
+.code -numbers -edit code/structs_funcs_revisited/nested_struct.go /^type Address/,/^}/
 
-.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^func \(p Person\) Print/,/^}/
+.code -numbers -edit code/structs_funcs_revisited/nested_struct.go /^func \(a Address\) FullAddress/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/nested_struct.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/nested_struct.go /^func \(e Employee\) Description/,/^}/
 
 ##
 
-.code -numbers -edit code/structs_funcs_revisited/interface_type.go /^func Print/,/^}/
+.play -numbers -edit code/structs_funcs_revisited/nested_struct.go /^func main/,/^}/
 
-.play -numbers -edit code/structs_funcs_revisited/interface_type.go /^func main/,/^}/
+##
+<h3>
+Struct Embedding
+</h3>
+
+.code -numbers -edit code/structs_funcs_revisited/embed.go /^type Address/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/embed.go /^func \(a Address\) FullAddress/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/embed.go /^type Employee/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/embed.go /^func \(e Employee\) Description/,/^}/
+
+##
+
+.play -numbers -edit code/structs_funcs_revisited/embed.go /^func main/,/^}/
+
+## OOPS
+
+## 
+
+**Go Does not support inheritance**
+
+##  
+
+**Without inheritance how to resuse the code 🤔 ?**
+
+GO favor object Composition over Inheritance
+
+Use Embedding for Composition
+
+##
+
+Inheritance -> "is a" relationship
+
+Composition -> "has a" relationship
+
+## Composition
+
+.code -numbers -edit code/structs_funcs_revisited/composition.go /^type Animal/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/composition.go /^type Dog/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/composition.go /^func \(d Dog\) Describe/,/^}/
+
+##
+
+.code -numbers -edit code/structs_funcs_revisited/composition.go /^type Cat/,/^}/
+
+.code -numbers -edit code/structs_funcs_revisited/composition.go /^func \(c Cat\) Describe/,/^}/
+
+.play -numbers -edit code/structs_funcs_revisited/composition.go /^func main/,/^}/
+
+## Interfaces
+
+
+##
+
+An interface type is defined as a set of method signatures
+
+Ex:
+
+.code -numbers -edit code/structs_funcs_revisited/composition_interface.go /^type Describer/,/^}/
 
 
 
+## 
+
+.code -numbers -edit code/structs_funcs_revisited/composition_interface.go /^func \(d Dog\) Describe/,/^}/
+
+    A value of interface type can hold any value that implements those methods.
 
 
+.code -numbers -edit code/structs_funcs_revisited/composition_interface.go /^func describeAnimal/,/^}/
 
-    
+.code -numbers -edit code/structs_funcs_revisited/composition_interface.go /^func main/,/^}/
+
+##
+
+Any type that implements all the methods of an interface is said to satisfy that 
+interface implicitly
+
+##
+
+Is it possible to define an interface without methods 🤔 ?
+
+If yes how powerful 💪 it is ?
 
 
+##
+Yes, It is posible !
+
+An interface without any method signatures is called the empty interface.
+
+It's represented by <i><b>interface{}</b></i>
+
+## 
+
+.play -numbers -edit code/structs_funcs_revisited/interface.go /^func main/,/^}/
 
 
+<i><b>Dejavu </b></i>
+
+Those we called as ducktyping in python ! or am i confused ?
+
+##
+
+Interfaces allows for polymorphism and decoupling in your code, enabling you to write 
+more flexible and reusable software
+
+Interfaces help us in writing the <b>Dependency Injection (DI)</b> code
+
+Very helpful in writing GO unittest cases

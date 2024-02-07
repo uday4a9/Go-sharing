@@ -2,15 +2,13 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
-func printHello() {
+func printHello() { // HL
 	fmt.Println("Hello")
 }
 
 func main() {
-	go printHello() // HL
-	time.Sleep(1 * time.Second)
+	printHello() // HL
 	fmt.Println("main function")
 }

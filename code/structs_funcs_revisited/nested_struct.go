@@ -16,12 +16,12 @@ func (a Address) FullAddress() string {
 type Employee struct {
 	Name    string
 	ID      string
-	Address // HL
+	Address Address // HL
 }
 
 func (e Employee) Description() {
 	fmt.Printf("%s (%s)\n", e.Name, e.ID)
-	fmt.Println(e.FullAddress()) // HL
+	fmt.Println(e.Address.FullAddress()) // HL
 }
 
 func main() {
@@ -35,6 +35,5 @@ func main() {
 			Zip:    "62701",
 		},
 	}
-	fmt.Println(e.Name, e.Address.Street) // HL
-	fmt.Println(e.Name, e.Street)         // HL
+	e.Description() // HL
 }

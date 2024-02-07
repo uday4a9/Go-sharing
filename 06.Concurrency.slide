@@ -1,76 +1,194 @@
 # Concurrency
 
-## Goroutines
-    concurrency is not parallelism !
-    The goroutine is the core concept in Go's concurrency mode
-    Goroutines are lightweight processes managed by the Go runtime.
+## 
+
+<h2>
+concurrency is not parallelism !
+</h2>
+
+## 
+
+how to invoke a subroutine/function ?
+
+.code -numbers -edit code/concurrency/subroutine.go /^func printHello/,/^}/
+   
+.play -numbers -edit code/concurrency/subroutine.go /^func main/,/^}/
+
+##
+
+The <i><b>goroutine</b></i> is the core concept in Go's concurrency mode
+
+Youe can create a goroutine by adding a <i><b>go</b></i> keyword as prexfix to function invocation
+
+.code -numbers -edit code/concurrency/goroutine.go /^func printHello/,/^}/
+   
+.play -numbers -edit code/concurrency/goroutine.go /^func main/,/^}/
+
+## 
+
+What Happened ?
+
+Why it didn't get executed ?
+
+##
+
+ Goroutines are lightweight processes managed by the Go runtime.
+
+ goroutine scheduled to execute, but main goroutine is not waiting for the
+ other go routine to get executed.
+
+##
+
+.code -numbers -edit code/concurrency/goroutine2.go /^func printHello/,/^}/
+
+.play -numbers -edit code/concurrency/goroutine2.go /^func main/,/^}/
+
+##
     Advantages:
         - Goroutine creation is faster than thread creation
         - Goroutine initial stack sizes are smaller than thread stack sizes and can grow as needed
         - Switching between goroutines is faster than switching between threads
         - The scheduler is able to optimize its decisions because it is part of the Go process
-    A goroutine is launched by placing the go keyword before a function invocation.
 
-.play -numbers -edit code/concurrency/goroutine.go /^func main/,/^}/
+## Waitgroups
+    Sometimes one goroutine (main function) needs to wait for multiple goroutines to complete
 
-##
+.code -numbers -edit code/concurrency/waitgroups.go /^func ExecuteTask/,/^}/
 
-.play -numbers -edit code/concurrency/goroutine2.go /^func main/,/^}/
+.play -numbers -edit code/concurrency/waitgroups.go /^func main/,/^}/
 
-## Channels
+This mostly used in worker pattern
+
+## 
+
+How to goroutines communicate ?
+
+## Channels Intro
     Goroutines communicate using channels. Like slices and maps, channels are a built-in type 
     created using the make function.
 
     Syntax:
         var ch chan <data_type>
-        nil type initialization
 
     Syntax2:
         ch := make(chan <data_type>)
-        Like maps, channels are reference types.
+            - Like maps, channels are reference types.
 
     Reading, Writing, and Buffering
-        Use the <- operator to interact with a channel.
+        Use the <-operator to interact with a channel.
 
     Ex:
         ch := make(chan int)
         a := <-ch   // Reading the value from the channel
         ch <- b      // Writing the value 'b' to the channel
 
-## Channels
-    - Each value written to a channel can only be read once
-    - By default channels are unbuffered
-    - Every write to an open, unbuffered channel causes the writing goroutine 
-      to pause until another goroutine reads from the same channel.
-    - Likewise, a read from an open, unbuffered channel causes the reading goroutine 
-      to pause until another goroutine writes to the same channel.
+## 
 
-.play -numbers -edit code/concurrency/chan1.go 
+nil type initialization
+
+.play -numbers -edit code/concurrency/chanprop1.go 
+
+## 
+Reading(<-) data from a channel
+
+.play -numbers -edit code/concurrency/chanprop2.go 
 
 ##
 
-    - We can apply for-range on channels (Ref: chan2.go)
-    - When you are done writing to a channel, you close it using the built-in 
-      close function. (Ref: chan2.go)
-    - ok, done patter on channels similar to maps.
+A read(<- chan) from an open, unbuffered channel causes the reading goroutine 
+to pause until another goroutine writes to the same channel.
 
-## Concurrent Read/Write operations
+If there is no goroutine pushing the data, that causes program to deadlock
+and program panics
 
-.play -numbers -edit code/concurrency/concur.go /^func main/,/^}/
+## 
+
+Every write(chan <-) to an open, unbuffered channel causes the writing goroutine 
+to pause until another goroutine reads from the same channel.
+
+.play -numbers -edit code/concurrency/chanprop3.go
+
+You know why ???
+
+##
+
+Read<b>(<-chan)</b> and Write<b>(chan <-)</b> together and proper !
+
+.play -numbers -edit code/concurrency/chanprop4.go
+
+##
+
+Any Guess ??
+
+.play -numbers -edit code/concurrency/chanprop5.go
+
+## 
+How do we avoid this ?
+
+##
+close the channel after writing the data
+
+## 
+
+.play -numbers -edit code/concurrency/chanprop6.go
+
+## 
+channel is iterable (with for range)
+
+.code -numbers -edit code/concurrency/chanprop7.go /^func gen/,/^}/
+
+.play -numbers -edit code/concurrency/chanprop7.go /^func main/,/^}/
+
+##
+What Happened 🤷?
+
+##
+
+forgot to close the channel 🤦 !!!
+
+## 
+
+Updated 🙆 !
+
+.code -numbers -edit code/concurrency/chanprop8.go /^func gen/,/^}/
+
+.play -numbers -edit code/concurrency/chanprop8.go /^func main/,/^}/
+
+## 
+
+Let me Try This !
+
+.play -numbers -edit code/concurrency/chanprop9.go /^func main/,/^}/
+
+##
+
+How 🤔 earlier for loop stopped producing when it encounters channel close ?
+
+.play -numbers -edit code/concurrency/chanprop8.go /^func main/,/^}/
+
+## 
+
+ok, val pattern on channel (similar to maps)!
+
+.play -numbers -edit code/concurrency/chanprop10.go /^func main/,/^}/
+
+##
+
+Each value written to a channel can only be read once
+
+.play -numbers -edit code/concurrency/chanprop11.go /^func main/,/^}/
+
+##
+
+Till now, we've gone through only communication between two Goroutines
+
+How to handle multiple goroutine communication ?
+
+## select 
+
+.play -numbers -edit code/concurrency/chanprop12.go /^func main/,/^}/
 
 
-## select
-    The select statement is the other thing that sets apart Go's concurrency model.
-    It is the control structure for concurrency in Go, and it elegantly solves a 
-    common problem: if you can perform two concurrent operations, which one do you do first? 
-    You can't favor one operation over others, or you'll never process some cases.
-
-.play -numbers -edit code/concurrency/concur2.go /^func main/,/^}/
-
-## Waitgroups
-    Sometimes one goroutine needs to wait for multiple goroutines to complete their work.
-
-.play -numbers -edit code/concurrency/waitgroups.go /^func main/,/^}/
 
 
 
