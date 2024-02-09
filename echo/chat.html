@@ -1,0 +1,33 @@
+<body>
+
+    <!-- <input id="input" type="text"> -->
+    <!-- <button onclick="send()">Send</button> -->
+    <pre id="output"></pre>
+
+    <script>
+        // var input = document.getElementById("input");
+        var output = document.getElementById("output");
+        var socket = new WebSocket("ws://localhost:8080/chatws");
+
+        socket.onopen = () => {
+            // output.innerHTML += "connected\n";
+            output.innerHTML += "Chat started\n";
+        };
+
+        socket.onmessage = (e) => {
+
+            console.log("got the message", e);
+            const msg = JSON.parse(e.data)
+            // Use the data here
+            output.innerHTML += msg.username + ": " + msg.message + "\n"
+        };
+
+
+        // function send() {
+        //     socket.send(input.value);
+        //     input.value = "";
+        // }
+    </script>
+</body>
+
+</html>

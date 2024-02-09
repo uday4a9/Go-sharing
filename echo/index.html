@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+
+        .form-container input,
+        .form-container button {
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div id="chatForm">
+        <div><input id="username" type="text"></div>
+        <div><input id="message" type="text"></div>
+        <button onclick="send()">Send</button>
+    </div> -->
+
+
+    <div class="form-container">
+        <input type="text" id="username" name="username" placeholder="User's Name" required>
+        <input type="text" id="message" name="message" placeholder="Message" required>
+
+        <button onclick="send()">Submit</button>
+    </div>
+    
+    <pre id="output"></pre>
+
+    <script>
+        var username = document.getElementById("username");
+        var message = document.getElementById("message");
+        var socket = new WebSocket("ws://localhost:8080/echo");
+        
+        console.log("socket is instantiated", socket)
+        // socket.onopen = () => {
+        //     output.innerHTML += "connected\n";
+        // };
+
+        function send() {
+            const str = `{
+                "username": "${username.value}",
+                "message": "${message.value}"
+            }`
+            socket.send(str);
+            // socket.send("sample")
+            message.value = ""
+            username.readOnly = true;
+        }
+    </script>
+</body>
+
+</html>
