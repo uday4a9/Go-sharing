@@ -88,7 +88,8 @@ Struct Embedding
 
 .play -numbers -edit code/structs_funcs_revisited/embed.go /^func main/,/^}/
 
-## OOPS
+## 
+<h1><s>OOPS</s></h1>
 
 ## 
 

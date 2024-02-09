@@ -8,12 +8,12 @@ type Employee struct {
 }
 
 // Display() is a method : Value receiver
-func (e Employee) Display() {
+func (e Employee) Display() { // HL
 	fmt.Println(e.Name, "is", e.Age, "years old.")
 }
 
 // SetAge() is a method : Value receiver
-func (e Employee) SetAge(age int) {
+func (e Employee) SetAge(age int) { // HL
 	e.Age = age
 }
 

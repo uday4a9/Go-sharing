@@ -8,7 +8,7 @@ type Employee struct {
 }
 
 // Display() is a method : Value receiver
-func (e Employee) Display() {
+func (e Employee) Display() { // HL
 	fmt.Println(e.Name, "is", e.Age, "years old.")
 }
 

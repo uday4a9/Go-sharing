@@ -16,9 +16,9 @@ how to invoke a subroutine/function ?
 
 ##
 
-The <i><b>goroutine</b></i> is the core concept in Go's concurrency mode
+The <i><b>goroutine</b></i> is the core concept in Go's Concurrency
 
-Youe can create a goroutine by adding a <i><b>go</b></i> keyword as prexfix to function invocation
+You can create a goroutine by adding a <i><b>go</b></i> keyword as prexfix to function invocation
 
 .code -numbers -edit code/concurrency/goroutine.go /^func printHello/,/^}/
    
