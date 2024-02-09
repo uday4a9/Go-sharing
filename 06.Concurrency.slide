@@ -189,7 +189,12 @@ How to handle multiple goroutine communication ?
 .play -numbers -edit code/concurrency/chanprop12.go /^func main/,/^}/
 
 
+## Buffered Channels
 
+Buffered channels are useful when you know how many goroutines you have launched, want to limit 
+the number of goroutines you will launch, or want to limit the amount of work that is queued up.
+
+.play -numbers -edit code/concurrency/chanprop13.go /^func main/,/^}/
 
 
 
